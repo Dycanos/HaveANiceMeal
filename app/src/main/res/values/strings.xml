@@ -2,4 +2,15 @@
     <string name="app_name">HaveANiceMeal</string>
     <string name="choisi_ton_menu">Choisi ton menu !</string>
     <string name="decouvre">Découvre</string>
+    <string name="salade_cesar">Salade César</string>
+    <string name="salade_grecque">Salade grecque</string>
+    <string name="salade_nicoise">Salade niçoise</string>
+    <string name="salade_vosgienne">Salade vosgienne</string>
+    <string name="salad_cesar_ingredients">salade verte, poulet, parmesan, pain, oeufs, anchois</string>
+    <string name="salad_grecque_ingredients">salade romaine, tomates, concombres, oignons rouges, olives noires</string>
+    <string name="salad_nicoise_ingredients">salade  Mesclun, tomates, anchois, thon, poivrons verts, oeufs, olives noires, radis</string>
+    <string name="salad_vosgienne_ingredients">salade verte, pomme de terre, lardons fumés, croutons nature, tomates cerises, oeufs, crème fraiche</string>
+    <string name="euros">%d €</string>
+    <string name="see_ingredients">Voir les ingrédients</string>
+    <string name="ingredients">Ingrédients :</string>
 </resources>
