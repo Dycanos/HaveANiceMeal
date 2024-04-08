@@ -21,7 +21,7 @@ class OrderViewModel : ViewModel() {
         _uiState.update { currentState ->
             currentState.copy(
                 salad = salad,
-                price = salad.price.toString()
+                price = salad.price
             )
         }
     }

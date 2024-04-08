@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
-
 package com.example.haveanicemeal
 
 import android.content.Context
@@ -10,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -104,8 +101,7 @@ fun MealApp(
             composable(route = MealScreen.Start.name){
                 HomePageScreen(
                     onNextButtonClicked = {
-                        navController.navigate(MealScreen.Salad.name)
-                                          },
+                        navController.navigate(MealScreen.Salad.name)},
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(dimensionResource(id = R.dimen.padding_medium))
@@ -132,7 +128,7 @@ fun MealApp(
                     onSelectionChanged = {viewModel.setDessert(it)},
                     modifier = Modifier.fillMaxHeight())
             }
-            composable(route = MealScreen.Dish.name){
+            composable(route = MealScreen.Dessert.name){
                 SelectDishScreen(
                     onNextButtonClicked = {
                         navController.navigate(MealScreen.Summary.name)

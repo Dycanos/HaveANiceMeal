@@ -58,7 +58,7 @@ fun HomePageScreen(
         }
 
         Button(
-            onClick = { onNextButtonClicked },
+            onClick =  onNextButtonClicked,
             colors = ButtonDefaults.buttonColors(orangeHomePage),
             modifier = Modifier.width(dimensionResource(id = R.dimen.width_logo))
                 .padding(bottom = dimensionResource(id = R.dimen.padding_medium))

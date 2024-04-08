@@ -12,5 +12,5 @@ data class OrderUiState(
     /** dessert of the menu in the order (such as "", "", etc..) */
     val dessert: Dish = Dish(0,0,0,0),
     /** Total price for the order */
-    val price: String = "",
+    val price: Int = 0,
 )

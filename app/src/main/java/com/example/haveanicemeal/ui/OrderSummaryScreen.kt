@@ -16,7 +16,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -42,9 +41,9 @@ fun OrderSummaryScreen(
     //Load and format a string resource with the parameters.
     val orderSummary = stringResource(
         R.string.order_details,
-        orderUiState.salad.title,
-        orderUiState.dish.title,
-        orderUiState.dessert.title,
+        stringResource(id = orderUiState.salad.title),
+        stringResource(id = orderUiState.dish.title),
+        stringResource(id = orderUiState.dessert.title),
         orderUiState.price
     )
     val newOrder = stringResource(R.string.new_order)
@@ -91,7 +90,7 @@ fun OrderSummaryScreen(
                 }
                 OutlinedButton(
                     modifier = Modifier.fillMaxWidth(),
-                    onClick = {onCancelButtonClicked}
+                    onClick = onCancelButtonClicked
                 ) {
                     Text(stringResource(R.string.cancel))
                 }
@@ -104,7 +103,7 @@ fun OrderSummaryScreen(
  * Composable that displays formatted [subtotal] that will be formatted and displayed on screen
  */
 @Composable
-fun FormattedPriceLabel(subtotal: String, modifier: Modifier = Modifier) {
+fun FormattedPriceLabel(subtotal: Int, modifier: Modifier = Modifier) {
     Text(
         text = stringResource(R.string.subtotal_price, subtotal),
         modifier = modifier,
@@ -117,7 +116,7 @@ fun FormattedPriceLabel(subtotal: String, modifier: Modifier = Modifier) {
 fun OrderSummaryPreview() {
     HaveANiceMealTheme {
         OrderSummaryScreen(
-            orderUiState = OrderUiState(DataSource.salads[0], DataSource.salads[1], DataSource.salads[2], "$300.00"),
+            orderUiState = OrderUiState(DataSource.salads[0], DataSource.salads[1], DataSource.salads[2], 300),
             onCancelButtonClicked = {},
             onSendButtonClicked = { _: String, _: String -> },
             modifier = Modifier.fillMaxHeight()
