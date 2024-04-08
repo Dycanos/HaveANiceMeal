@@ -10,6 +10,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -40,16 +41,23 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.haveanicemeal.R
+import com.example.haveanicemeal.ui.data.DataSource
 import com.example.haveanicemeal.ui.data.Dish
-import com.example.haveanicemeal.ui.data.salads
 import com.example.haveanicemeal.ui.theme.orangeHomePage
 
 @Composable
-fun SelectDishScreen(modifier: Modifier = Modifier){
+fun SelectDishScreen(
+    dishes: List<Dish>,
+    onSelectionChanged: (Dish) -> Unit = {},
+    onCancelButtonClicked: () -> Unit = {},
+    onNextButtonClicked: () -> Unit = {},
+    modifier: Modifier = Modifier)
+
+{
     LazyColumn(modifier = modifier){
-        items(salads){
-            SaladItem(
-                salad = it,
+        items(dishes){
+            DishItem(
+                dish = it,
                 modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small))
             )
         }
@@ -57,7 +65,7 @@ fun SelectDishScreen(modifier: Modifier = Modifier){
 }
 
 @Composable
-fun SaladItem(salad: Dish,modifier: Modifier = Modifier){
+fun DishItem(dish: Dish,modifier: Modifier = Modifier){
     var expanded by rememberSaveable { mutableStateOf(false) }
     var selectedValue by rememberSaveable { mutableStateOf("") }
 
@@ -80,16 +88,16 @@ fun SaladItem(salad: Dish,modifier: Modifier = Modifier){
                 verticalAlignment = Alignment.CenterVertically){
 
                 RadioButton(selected = true, onClick = { /*TODO*/ }, colors = RadioButtonDefaults.colors(orangeHomePage))
-                SaladIcon(salad.imageResourceId)
-                SaladInformation(salad.title,salad.price)
+                DishIcon(dish.imageResourceId)
+                DishInformation(dish.title,dish.price)
                 Spacer(modifier = Modifier.weight(1f))
-                SaladItemButton(
+                DishItemButton(
                     expanded = expanded,
                     onClick = { expanded = !expanded}
                 )}
             if (expanded ){
-                SaladIngredients(
-                    saladIngredients = salad.ingredients,
+                DishIngredients(
+                    dishIngredients = dish.ingredients,
                     modifier = Modifier.padding(
                         start = dimensionResource(R.dimen.padding_medium),
                         top = dimensionResource(R.dimen.padding_small),
@@ -103,24 +111,24 @@ fun SaladItem(salad: Dish,modifier: Modifier = Modifier){
 }
 
 @Composable
-fun SaladIcon(@DrawableRes saladIcon: Int, modifier: Modifier = Modifier){
+fun DishIcon(@DrawableRes dishIcon: Int, modifier: Modifier = Modifier){
     Image(
         modifier = modifier
             .size(dimensionResource(R.dimen.image_size))
             .padding(dimensionResource(R.dimen.padding_small))
             .clip(MaterialTheme.shapes.extraLarge),
-        painter = painterResource(saladIcon),
+        painter = painterResource(dishIcon),
 
         contentDescription = null
     )
 }
 
 @Composable
-fun SaladInformation(@StringRes saladTitle: Int, price:Int, modifier: Modifier = Modifier){
+fun DishInformation(@StringRes dishTitle: Int, price:Int, modifier: Modifier = Modifier){
 
     Column(modifier = modifier) {
         Text(
-            text = stringResource(saladTitle),
+            text = stringResource(dishTitle),
             style = MaterialTheme.typography.headlineSmall,
             modifier = Modifier.padding(top = dimensionResource(R.dimen.padding_small))
         )
@@ -132,7 +140,7 @@ fun SaladInformation(@StringRes saladTitle: Int, price:Int, modifier: Modifier =
 }
 
 @Composable
-private fun SaladItemButton(expanded: Boolean, onClick: () -> Unit, modifier: Modifier = Modifier) {
+private fun DishItemButton(expanded: Boolean, onClick: () -> Unit, modifier: Modifier = Modifier) {
 
     IconButton(onClick = onClick ,modifier = modifier) {
         Icon(
@@ -145,14 +153,14 @@ private fun SaladItemButton(expanded: Boolean, onClick: () -> Unit, modifier: Mo
 }
 
 @Composable
-fun SaladIngredients(@StringRes saladIngredients: Int,modifier: Modifier = Modifier){
+fun DishIngredients(@StringRes dishIngredients: Int,modifier: Modifier = Modifier){
     Column(modifier = modifier) {
         Text(
             text = stringResource(R.string.ingredients),
             style = MaterialTheme.typography.labelLarge
         )
         Text(
-            text = stringResource(id = saladIngredients),
+            text = stringResource(id = dishIngredients),
             style = MaterialTheme.typography.bodyLarge
         )
     }
@@ -160,6 +168,9 @@ fun SaladIngredients(@StringRes saladIngredients: Int,modifier: Modifier = Modif
 
 @Preview
 @Composable
-fun SaladItemPreview(){
-    SaladItem(salad = Dish(R.drawable.salade_cesar, R.string.salade_cesar, 8, R.string.salad_cesar_ingredients), modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small)))
+fun DishItemPreview(){
+    SelectDishScreen(
+        dishes= DataSource.desserts,
+        modifier=Modifier.fillMaxHeight()
+    )
 }

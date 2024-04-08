@@ -31,6 +31,7 @@ import com.example.haveanicemeal.ui.theme.orangeHomePage
  */
 @Composable
 fun HomePageScreen(
+    onNextButtonClicked: ()->Unit,
     modifier: Modifier = Modifier) {
 
     Column(
@@ -57,7 +58,7 @@ fun HomePageScreen(
         }
 
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { onNextButtonClicked },
             colors = ButtonDefaults.buttonColors(orangeHomePage),
             modifier = Modifier.width(dimensionResource(id = R.dimen.width_logo))
                 .padding(bottom = dimensionResource(id = R.dimen.padding_medium))
@@ -80,5 +81,5 @@ fun HomePageScreen(
 @Preview
 @Composable
 fun HomePagePreview(){
-    HomePageScreen(modifier = Modifier.fillMaxSize())
+    HomePageScreen({},modifier = Modifier.fillMaxSize())
 }
