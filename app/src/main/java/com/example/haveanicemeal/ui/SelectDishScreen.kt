@@ -7,6 +7,7 @@ import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -16,14 +17,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Text
@@ -54,59 +58,89 @@ fun SelectDishScreen(
     modifier: Modifier = Modifier)
 
 {
-    LazyColumn(modifier = modifier){
-        items(dishes){
-            DishItem(
-                dish = it,
-                modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small))
-            )
-        }
-    }
-}
+    var selectedValue by rememberSaveable() { mutableStateOf("") }
 
-@Composable
-fun DishItem(dish: Dish,modifier: Modifier = Modifier){
-    var expanded by rememberSaveable { mutableStateOf(false) }
-    var selectedValue by rememberSaveable { mutableStateOf("") }
+    Column(modifier = modifier,
+        verticalArrangement = Arrangement.SpaceBetween) {
+        LazyColumn(modifier = Modifier) {
+            items(dishes) {
+                var expanded by rememberSaveable { mutableStateOf(false) }
+                val title = stringResource(id = it.title)
+                Card(
+                    modifier = Modifier,
+                    colors = CardDefaults.cardColors(Color.White),
+                    border = BorderStroke(dimensionResource(id = R.dimen.border_card), orangeHomePage)){
 
-    Card(
-        modifier = modifier,
-        colors = CardDefaults.cardColors(Color.White),
-        border = BorderStroke(dimensionResource(id = R.dimen.border_card), orangeHomePage)){
+                    Column(
+                        modifier = Modifier.animateContentSize(
+                            animationSpec = spring(
+                                dampingRatio = Spring.DampingRatioNoBouncy,
+                                stiffness = Spring.StiffnessMedium)
+                        )
+                    )
+                    {
+                        Row(modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(dimensionResource(R.dimen.padding_small))
+                            .selectable(
+                                selected = selectedValue == stringResource(id = it.title),
+                                onClick = {
+                                    selectedValue = title
+                                    onSelectionChanged(it)
+                                }),
+                            verticalAlignment = Alignment.CenterVertically){
 
-        Column(
-            modifier = Modifier.animateContentSize(
-                animationSpec = spring(
-                dampingRatio = Spring.DampingRatioNoBouncy,
-                stiffness = Spring.StiffnessMedium)
-                )
-            )
-        {
-            Row(modifier = Modifier
-                .fillMaxWidth()
-                .padding(dimensionResource(R.dimen.padding_small)),
-                verticalAlignment = Alignment.CenterVertically){
+                            RadioButton(
+                                selected = selectedValue == stringResource(id = it.title),
+                                onClick = {
+                                    selectedValue = title
+                                    onSelectionChanged(it)
+                                },
+                                colors = RadioButtonDefaults.colors(orangeHomePage))
+                            DishIcon(it.imageResourceId)
+                            DishInformation(it.title,it.price)
+                            Spacer(modifier = Modifier.weight(1f))
+                            DishItemButton(
+                                expanded = expanded,
+                                onClick = { expanded = !expanded}
+                            )}
+                        if (expanded ){
+                            DishIngredients(
+                                dishIngredients = it.ingredients,
+                                modifier = Modifier.padding(
+                                    start = dimensionResource(R.dimen.padding_medium),
+                                    top = dimensionResource(R.dimen.padding_small),
+                                    end = dimensionResource(R.dimen.padding_medium),
+                                    bottom = dimensionResource(R.dimen.padding_medium)
+                                ))
+                        }
+                    }
 
-                RadioButton(selected = true, onClick = { /*TODO*/ }, colors = RadioButtonDefaults.colors(orangeHomePage))
-                DishIcon(dish.imageResourceId)
-                DishInformation(dish.title,dish.price)
-                Spacer(modifier = Modifier.weight(1f))
-                DishItemButton(
-                    expanded = expanded,
-                    onClick = { expanded = !expanded}
-                )}
-            if (expanded ){
-                DishIngredients(
-                    dishIngredients = dish.ingredients,
-                    modifier = Modifier.padding(
-                        start = dimensionResource(R.dimen.padding_medium),
-                        top = dimensionResource(R.dimen.padding_small),
-                        end = dimensionResource(R.dimen.padding_medium),
-                        bottom = dimensionResource(R.dimen.padding_medium)
-                    ))
                 }
+            }
         }
-
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(dimensionResource(R.dimen.padding_medium)),
+            horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium)),
+            verticalAlignment = Alignment.Bottom
+        ) {
+            OutlinedButton(
+                modifier = Modifier.weight(1f),
+                onClick = onCancelButtonClicked
+            ) {
+                Text(stringResource(R.string.cancel))
+            }
+            Button(
+                modifier = Modifier.weight(1f),
+                // the button is enabled when the user makes a selection
+                enabled = selectedValue.isNotEmpty(),
+                onClick = onNextButtonClicked
+            ) {
+                Text(stringResource(R.string.next))
+            }
+        }
     }
 }
 
@@ -165,6 +199,7 @@ fun DishIngredients(@StringRes dishIngredients: Int,modifier: Modifier = Modifie
         )
     }
 }
+
 
 @Preview
 @Composable

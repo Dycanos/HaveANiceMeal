@@ -18,9 +18,10 @@
     <string name="dish">Plats</string>
     <string name="salad">Salades</string>
     <string name="back_button">Back</string>
-    <string name="order_details">Salad: %1$s \\Dish: %2$s \\nDessert: %3$s \\nTotal: %4$s \\n\\nThank you!</string>
+    <string name="order_details">Salad: %1$s \\Dish: %2$s \\nDessert: %3$s \\nTotal: %4$s€ \\n\\nThank you!</string>
     <string name="new_order">Nouvelle commande !</string>
     <string name="send">Envoyer votre menu vers une autre application</string>
     <string name="cancel">Annuler</string>
-    <string name="subtotal_price">Prix total :</string>
+    <string name="subtotal_price">Prix total : %s€</string>
+    <string name="next">Suivant</string>
 </resources>
