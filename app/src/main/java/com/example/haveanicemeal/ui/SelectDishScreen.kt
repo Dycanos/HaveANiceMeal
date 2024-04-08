@@ -22,6 +22,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -66,10 +67,12 @@ fun SelectDishScreen(
             items(dishes) {
                 var expanded by rememberSaveable { mutableStateOf(false) }
                 val title = stringResource(id = it.title)
+                Spacer(modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small)))
                 Card(
                     modifier = Modifier,
                     colors = CardDefaults.cardColors(Color.White),
-                    border = BorderStroke(dimensionResource(id = R.dimen.border_card), orangeHomePage)){
+                    border = BorderStroke(dimensionResource(id = R.dimen.border_card), orangeHomePage))
+                {
 
                     Column(
                         modifier = Modifier.animateContentSize(
@@ -127,18 +130,21 @@ fun SelectDishScreen(
             verticalAlignment = Alignment.Bottom
         ) {
             OutlinedButton(
+                colors = ButtonDefaults.buttonColors(Color.White),
                 modifier = Modifier.weight(1f),
                 onClick = onCancelButtonClicked
             ) {
-                Text(stringResource(R.string.cancel))
+                Text(color = orangeHomePage,
+                    text = stringResource(R.string.cancel))
             }
             Button(
+                colors = ButtonDefaults.buttonColors(orangeHomePage),
                 modifier = Modifier.weight(1f),
                 // the button is enabled when the user makes a selection
                 enabled = selectedValue.isNotEmpty(),
                 onClick = onNextButtonClicked
             ) {
-                Text(stringResource(R.string.next))
+                Text(text = stringResource(R.string.next))
             }
         }
     }

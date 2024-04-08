@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -16,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -24,6 +26,7 @@ import com.example.haveanicemeal.R
 import com.example.haveanicemeal.ui.data.DataSource
 import com.example.haveanicemeal.ui.data.OrderUiState
 import com.example.haveanicemeal.ui.theme.HaveANiceMealTheme
+import com.example.haveanicemeal.ui.theme.orangeHomePage
 
 /**
  * This composable expects [orderUiState] that represents the order state, [onCancelButtonClicked]
@@ -83,16 +86,20 @@ fun OrderSummaryScreen(
                 verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small))
             ) {
                 Button(
+                    colors = ButtonDefaults.buttonColors(orangeHomePage),
                     modifier = Modifier.fillMaxWidth(),
                     onClick = { onSendButtonClicked(newOrder,orderSummary)}
                 ) {
                     Text(stringResource(R.string.send))
                 }
                 OutlinedButton(
+
+                    colors = ButtonDefaults.buttonColors(Color.White),
                     modifier = Modifier.fillMaxWidth(),
                     onClick = onCancelButtonClicked
                 ) {
-                    Text(stringResource(R.string.cancel))
+                    Text(text = stringResource(R.string.cancel),
+                        color = orangeHomePage)
                 }
             }
         }

@@ -22,8 +22,8 @@ object DataSource {
 
     val desserts = listOf(
         Dish(R.drawable.brownie,R.string.brownie,6,R.string.brownie_ingredients),
-        Dish(R.drawable.cafe_gourmand,R.string.cafe_gourmand,6,R.string.cafe_gourmand_ingredients),
-        Dish(R.drawable.creme_brulee,R.string.creme_brulee,6,R.string.creme_brulee_ingredients),
-        Dish(R.drawable.dame_blanche,R.string.dame_blanche,6,R.string.dame_blanche_ingredients)
+        Dish(R.drawable.cafe_gourmand,R.string.cafe_gourmand,8,R.string.cafe_gourmand_ingredients),
+        Dish(R.drawable.creme_brulee,R.string.creme_brulee,5,R.string.creme_brulee_ingredients),
+        Dish(R.drawable.dame_blanche,R.string.dame_blanche,5,R.string.dame_blanche_ingredients)
     )
 }

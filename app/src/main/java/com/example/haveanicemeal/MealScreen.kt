@@ -10,7 +10,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -19,9 +18,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -35,6 +36,7 @@ import com.example.haveanicemeal.ui.OrderViewModel
 import com.example.haveanicemeal.ui.SelectDishScreen
 import com.example.haveanicemeal.ui.data.DataSource
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.haveanicemeal.ui.theme.orangeHomePage
 
 enum class MealScreen(@StringRes val title: Int){
     Start(title = R.string.app_name),
@@ -54,9 +56,13 @@ fun MealAppBar(
     modifier: Modifier = Modifier
 ) {
     TopAppBar(
-        title = { Text(stringResource(id = currentScreen.title)) },
+        title = {
+            Text(text = stringResource(id = currentScreen.title),
+                color = Color.White,
+                fontWeight = FontWeight.Bold)
+                },
         colors = TopAppBarDefaults.mediumTopAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer
+            containerColor = orangeHomePage
         ),
         modifier = modifier,
         navigationIcon = {
@@ -179,4 +185,5 @@ private fun shareOrder(context: Context, subject: String, summary: String){
 @Preview
 @Composable
 fun MealScreenPreview(){
+    MealApp()
 }
