@@ -24,4 +24,20 @@
     <string name="cancel">Annuler</string>
     <string name="subtotal_price">Prix total : %s€</string>
     <string name="next">Suivant</string>
+    <string name="blanquette_de_veau">Blanquette de veau</string>
+    <string name="blanquette_de_veau_ingredients">blanquette de veau, champignon, oignon jaune, carottes, sauce du chef</string>
+    <string name="bouchee_a_la_reine_ingredients">poulet, veau, champignons, quenelles de veau, sauce du chef</string>
+    <string name="lasagne_ingredients">Viande hachée, pates, bolognaise, oignon, gruyère râpé</string>
+    <string name="pot_au_feu_ingredients">boeuf, carottes, oignon, poireaux, navets, clous de girofle</string>
+    <string name="pot_au_feu">Pot au feu</string>
+    <string name="lasagne">Lasagne</string>
+    <string name="bouch_e_la_reine">Bouchée à la reine</string>
+    <string name="dame_blanche">Dame blanche</string>
+    <string name="dame_blanche_ingredients">glace vanille, chocolat noir, crème chantilly, meringues</string>
+    <string name="creme_brulee">Crème brûlée</string>
+    <string name="creme_brulee_ingredients">oeuf, crème liquide, sucre, lait</string>
+    <string name="brownie">Brownie</string>
+    <string name="brownie_ingredients">chocolat noir, oeufs, sucre, farine, beurre</string>
+    <string name="cafe_gourmand">Café gourmand</string>
+    <string name="cafe_gourmand_ingredients">café, boule glace vanille, crème brulée, brownie</string>
 </resources>

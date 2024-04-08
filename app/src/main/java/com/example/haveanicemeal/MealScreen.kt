@@ -124,7 +124,7 @@ fun MealApp(
                         navController.navigate(MealScreen.Dessert.name)
                     },
                     onCancelButtonClicked = {cancelOrderAndNavigateToStart(viewModel,navController)},
-                    dishes = DataSource.desserts,
+                    dishes = DataSource.dishes,
                     onSelectionChanged = {viewModel.setDessert(it)},
                     modifier = Modifier.fillMaxHeight())
             }
@@ -134,7 +134,7 @@ fun MealApp(
                         navController.navigate(MealScreen.Summary.name)
                     },
                     onCancelButtonClicked = {cancelOrderAndNavigateToStart(viewModel,navController)},
-                    dishes = DataSource.dishes,
+                    dishes = DataSource.desserts,
                     onSelectionChanged = {viewModel.setDish(it)},
                     modifier = Modifier.fillMaxHeight())
             }
